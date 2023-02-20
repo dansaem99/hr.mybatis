@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE mapper PUBLIC './/mybatis.org//DTD Mapper 3.0//EN'
+	'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+<mapper namespace='com.my.hr.dao.map.LaborerMap'>
+	<select id='selectLaborers' resultMap='laborerMap'>
+		select laborer_id, laborer_name, hire_date
+		from laborers
+		order by laborer_id
+	</select>
+	
+	<resultMap id='laborerMap' type='laborer'>
+		<id property='laborerId' column='laborer_id'/>
+		<result property='laborerName' column='laborer_name'/>
+		<result property='hireDate' column='hire_date'/>
+	</resultMap>
+	
+	<insert id='insertLaborer'>
+		insert into laborers(laborer_id, laborer_name, hire_date)
+		values(laborer_id_seq.nextval, #{laborerName}, #{hireDate})
+	</insert>
+	
+	<update id='updateLaborer'>
+		update laborers
+		set laborer_name = #{laborerName}, hire_date = #{hireDate}
+		where laborer_id = #{laborerId}
+	</update>
+	
+	<delete id='deleteLaborer'>
+		delete laborers
+		where laborer_id = #{laborerId}
+	</delete>
+</mapper>
